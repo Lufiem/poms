@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		.duck {
+			height: 100px;
+			width: 100px;
+			background: red ;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+
+	<button class="btn">Кнопка</button>
+	<div>Очки: <span class="gold"></span></div>
+	<div style="background-image: url('pug-dance.gif'); position: absolute; height: 1000px; width: 1900px; opacity: 0.5;"></div>
+	<script type="text/javascript">
+		let gold = document.querySelector('.gold')
+		let y = [200, 400, 600]
+		let button = document.querySelector('.btn')
+		let point = 0
+		let types = ['good', 'good', 'bad'];
+		let interval1;
+		let pos = 0;
+			
+		
+		let createDuck = function () {
+			// body...
+			let duck = document.createElement('div');
+			document.body.appendChild(duck);
+			duck.classList.add('duck')
+			randomX = Math.round(Math.random()*1400+200);
+			duck.style.left = randomX + 'px';
+			randomY = Math.round(Math.random()*2);
+			duck.style.top = y[randomY] + 'px';
+
+			let typeIndex = Math.round(Math.random()*2);
+			duck.myType = types[typeIndex];
+
+			let randtype = Math.round(Math.random())
+			duck.myType = types[randtype];
+
+			if(duck.myType == "good"){
+				duck.style.backgroundImage = "url(pug-dance.gif)"
+				duck.style.backgroundSize = "100% 100%"
+			}
+			if(duck.myType == "bad"){
+				duck.style.backgroundImage = "url(pug-dance.gif)"
+				duck.style.backgroundSize = "100% 100%"
+			}
+			duck.onclick = function(){
+				duck.style.display = "none";
+				if(duck.myType=='good') {
+				point = point + 2;
+				gold.innerHTML = point;	
+				}
+				if(duck.myType=='bad'){
+					point = point - 1;
+					score.innerHTML = point;
+				}
+			}
+		}
+		let over = function() {
+			clearInterval(interval1);
+			if 	(point>=25) {
+				alert ("Win")
+				}
+			else{
+				alert ("lose")
+			}
+		}
+		
+		button.onclick = function(){
+			interval1 = setInterval(createDuck, 500)
+			setTimeout(over, 10000)
+		}
+		
+	</script>
+</body>
+</html>
